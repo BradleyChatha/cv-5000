@@ -11,6 +11,8 @@
   font: "DejaVu Sans"
 )
 
+#let accent = luma(50%)
+
 // Content //
 
 #let page1Header = [
@@ -39,14 +41,14 @@
   #let info(header, value) = stack(
     dir: ttb, 
     spacing: 6pt, 
-    text(header, luma(33%)), 
+    text(header, luma(33%).mix(accent)), 
     value
   )
   #text(size: 10pt)[
     #grid(
-      columns: (40%, 40%),
+      columns: (1fr, 1fr, 1fr),
       info([EMAIL], [bradley\@chatha.dev]),
-      info([PHONE], [On request/already provided])
+      info([PHONE], [On request/already provided]),
     )
   ]
 ]
@@ -58,15 +60,22 @@
   The most common compliment I receive is my ability to learn new skills and technology to a productive level of depth in a short amount of time.
 ]]
 
-#let experience(title, yearRange, company, points) = [
+#let experience(title, yearRange, company, points, tags) = [
   #grid(columns: (2fr, 1fr))[
     #text(title, weight: "bold", size: 12pt)
   ][
-    #align(text(yearRange, luma(33%)), right)
+    #align(text(yearRange, luma(33%).mix(accent)), right)
   ]
 
   #v(-4pt)
-  #text(company, luma(33%), size: 10pt)
+  #text(company, luma(33%).mix(accent), size: 10pt)
+
+  #let tag(value) = rect(text(value, 8pt, white), fill: luma(66%).mix(accent))
+  #stack(
+    dir: ltr,
+    spacing: 4pt,
+    ..tags.map(t => tag(t)),
+  )
 
   #text(points, size: 10pt)
 ]
@@ -79,7 +88,6 @@
     #list(
       spacing: 10pt,
       // TODO: Make it easier for me to tailor points down rather than having to comment them out and rearrange by hand.
-      [Core tags: GCP, AWS, Kubernetes, Istio, Terraform, Helm, Gitlab, Golang, TypeScript, ArgoCD.],
       [Revamped their Kubernetes-based Gitlab CI setup to be managed in Terraform, and make use of Workload Identity instead of manually managed long-lived tokens.],
       [Took full ownership of their infrastructure and Kubernetes clusters; migrated ClickOps projects into Terraform, and setup a streamlined foundation for their infrastructure going forward, on top of creating several from-scratch GCP projects.],
       [Created an extensive suite of CI templates to streamline most of their pipelines.],
@@ -96,7 +104,8 @@
       [Introduced a monthly maintenance schedule to ensure all active codebases are kept up to date; monitor costs, etc.],
       [Setup the groundwork for using BigQuery to calculate costs-per-client for one of their SaaS products.],
     )
-  ]
+  ],
+  ([GCP], [AWS], [Kubernetes], [Istio], [Terraform], [Helm], [Gitlab], [Golang], [ArgoCD], [Grafana])
 )
 
 #let experience2 = experience(
@@ -107,37 +116,33 @@
     #list(
       spacing: 10pt,
       // TODO: Make it easier for me to tailor points down rather than having to comment them out and rearrange by hand.
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
-      [TODO #lorem(16)],
+      [Lead their load testing initiative, working closely with the product teams to identify and optimise their code.],
+      [Maintained their Terraformed AWS & Datadog infrastructure, mainly for smaller tasks.],
+      [Implemented a few full Gitlab CI pipelines for Python and Go services.],
+      [Acted as a one-man internal help desk for the infrastructure team.],
+      [Implemented a Slack bot to automate tedious tasks such as onboarding; MR assignment, and "holding" environments for release.],
+      [Created a Go service that partially implemented the Cypher graph langauge, as a frontend for an object-oriented Postgres database.],
+      [Used an event-driven Python lambda function to generate human-friendly HTML reports for AWS Macie.],
+      [Implemented metrics in their Python codebase for DyanmoDB calls.],
+      [Created several Datadog dashboards that were referred to as high-quality.],
+      [Authored several internal RFCs, as well as comprehensive technical documentation for both existing and R&D-related projects.],
+      [Setup Renovate, and helped the engineering teams adopt it.],
     )
-  ]
+  ],
+  ([AWS], [Terraform], [Kubernetes], [Helm], [Gitlab], [Golang], [Python], [Datadog])
 )
 
 #let page1Experience = [
-  #heading([#text([EXPERIENCE], luma(20%))])
+  #heading([#text([EXPERIENCE], luma(20%).mix(accent))])
   #v(12pt)
   
   #grid(
     columns: (5%, 95%),
     [
       // TODO: Probably not worth the effort, but it'd be nice if I didn't have to manually align these things.
-      #line(start: (20%, 0%), end: (20%, 76%), stroke: 3pt + luma(22%))
+      #line(start: (20%, 0%), end: (20%, 76%), stroke: 3pt + luma(22%).mix(accent))
       
-      #let point = circle(fill: luma(22%), radius: 5pt)
+      #let point = circle(fill: luma(22%).mix(accent), radius: 5pt)
       #place(point, top + left, dx: -1.7%, dy: -0.5%)      
     ],
     [
@@ -151,9 +156,9 @@
     columns: (5%, 95%),
     [
       // TODO: Probably not worth the effort, but it'd be nice if I didn't have to manually align these things.
-      #line(start: (20%, 0%), end: (20%, 76%), stroke: 3pt + luma(22%))
+      #line(start: (20%, 0%), end: (20%, 49%), stroke: 3pt + luma(22%).mix(accent))
       
-      #let point = circle(fill: luma(22%), radius: 5pt)
+      #let point = circle(fill: luma(22%).mix(accent), radius: 5pt)
       #place(point, top + left, dx: -1.7%, dy: -0.5%)      
     ],
     [
